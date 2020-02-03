@@ -1,0 +1,16 @@
+LICENSE.txt
+MANIFEST.in
+README.rst
+setup.py
+testpkg_private.egg-info/PKG-INFO
+testpkg_private.egg-info/SOURCES.txt
+testpkg_private.egg-info/dependency_links.txt
+testpkg_private.egg-info/top_level.txt
+wargame/__init__.py
+wargame/abstractgameunit.py
+wargame/attackoftheorcs.py
+wargame/gameuniterror_v2.py
+wargame/gameutils.py
+wargame/hut.py
+wargame/knight.py
+wargame/orcrider.py

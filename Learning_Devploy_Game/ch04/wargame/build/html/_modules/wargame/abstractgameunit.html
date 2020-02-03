@@ -1,0 +1,157 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>wargame.abstractgameunit &#8212; wargame [] documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for wargame.abstractgameunit</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    作者:北辰</span>
+<span class="sd">    日期:13/05/2019</span>
+<span class="sd">    版本:2.0.0</span>
+<span class="sd">    功能:兽人之袭文本游戏,AbstractGameUnit抽象类</span>
+<span class="sd">    1.0.0版本改进之处:使用面向对象编程,并使用抽象基类</span>
+<span class="sd">    1.0.0新增功能: 1.新的使命是获得所有木屋并击败所有的敌人</span>
+<span class="sd">                  2.可以在同伴的木屋或者空闲的木屋治疗</span>
+<span class="sd">                  3.引入一个或者多个骑士来帮助Foo先生,他们可以轮流占领木屋</span>
+<span class="sd">                  4.木屋的数量是可配置的,例如增加到10个</span>
+<span class="sd">                  5.每个木屋中可以存放一些黄金或者武器,这样Foo先生和他的同伴们可以捡起来</span>
+<span class="sd">    1.1.0新增功能:增加异常处理</span>
+<span class="sd">    1.1.5改进之处:定义一个异常处理类</span>
+<span class="sd">    2.0.0 代码模块化</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">gameutils</span> <span class="k">import</span> <span class="n">weighted_random_selection</span><span class="p">,</span><span class="n">print_bold</span>
+<span class="kn">from</span> <span class="nn">gameuniterror_v2</span> <span class="k">import</span> <span class="n">HealthMeterException</span>
+
+<div class="viewcode-block" id="AbstractGameUnit"><a class="viewcode-back" href="../../wargame.html#wargame.abstractgameunit.AbstractGameUnit">[docs]</a><span class="k">class</span> <span class="nc">AbstractGameUnit</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A base class for creating various game characters&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_hp</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">health_meter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enemy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unit_type</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="AbstractGameUnit.info"><a class="viewcode-back" href="../../wargame.html#wargame.abstractgameunit.AbstractGameUnit.info">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Information on the unit (MUST be overridden in subclasses)&quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="AbstractGameUnit.attack"><a class="viewcode-back" href="../../wargame.html#wargame.abstractgameunit.AbstractGameUnit.attack">[docs]</a>    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">enemy</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The main logic to determine injured unit and amount of injury</span>
+
+<span class="sd">        .. todo:: Check if enemy exists!</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">injured_unit</span> <span class="o">=</span> <span class="n">weighted_random_selection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">enemy</span><span class="p">)</span>
+        <span class="n">injury</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">injured_unit</span><span class="o">.</span><span class="n">health_meter</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">injured_unit</span><span class="o">.</span><span class="n">health_meter</span><span class="o">-</span><span class="n">injury</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Attack! &quot;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_health</span><span class="p">(</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">enemy</span><span class="o">.</span><span class="n">show_health</span><span class="p">(</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AbstractGameUnit.heal"><a class="viewcode-back" href="../../wargame.html#wargame.abstractgameunit.AbstractGameUnit.heal">[docs]</a>    <span class="k">def</span> <span class="nf">heal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">heal_by</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">full_healing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Heal the unit replenishing all the hit points&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">health_meter</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_hp</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">full_healing</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">health_meter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_hp</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># TODO: Do you see a bug here? it can exceed max hit points!</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">health_meter</span> <span class="o">+=</span> <span class="n">heal_by</span>
+
+        <span class="c1"># raise a custom exception. Refer to the chapter on exception handling</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">health_meter</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_hp</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">HealthMeterException</span><span class="p">(</span><span class="s2">&quot;health_meter &gt; max_hp!&quot;</span><span class="p">)</span>
+            <span class="c1"># raise GameUnitError(&quot;health_meter &gt; max_hp!&quot;,101)</span>
+
+        <span class="n">print_bold</span><span class="p">(</span><span class="s2">&quot;You are HEALED!&quot;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_health</span><span class="p">(</span><span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AbstractGameUnit.reset_health_meter"><a class="viewcode-back" href="../../wargame.html#wargame.abstractgameunit.AbstractGameUnit.reset_health_meter">[docs]</a>    <span class="k">def</span> <span class="nf">reset_health_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset the `health_meter` (assign default hit points)&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">health_meter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_hp</span></div>
+
+<div class="viewcode-block" id="AbstractGameUnit.show_health"><a class="viewcode-back" href="../../wargame.html#wargame.abstractgameunit.AbstractGameUnit.show_health">[docs]</a>    <span class="k">def</span> <span class="nf">show_health</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">bold</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Show the remaining hit points of the player and the enemy&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: what if there is no enemy?</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Health: </span><span class="si">%s</span><span class="s2">: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">health_meter</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bold</span><span class="p">:</span>
+            <span class="n">print_bold</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, DMWillie.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

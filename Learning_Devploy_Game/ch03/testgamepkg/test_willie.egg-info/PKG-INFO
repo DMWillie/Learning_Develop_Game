@@ -1,0 +1,36 @@
+Metadata-Version: 1.0
+Name: test-willie
+Version: 2.0.2
+Summary: my fantasy game
+Home-page: https://testpypi.python.org/pypi/test_willie/
+Author: DMWillie
+Author-email: 2312472575@qq.com
+License: LICENSE.txt
+Description: Attack of the Orcs
+        ==================
+        
+        Introduction
+        -------------
+        This is a command line fantasy war game!
+        
+        Documentation
+        --------------
+        Documentation can be found at...
+        
+        Example Usage
+        -------------
+        Here is an example to import the modules from this package.
+        
+        .. code:: python
+        
+            from wargame.attackoftheorcs import AttackOfTheOrcs
+            game = AttackOfTheOrcs()
+            game.play()
+        
+        LICENSE
+        -------
+        See LICENSE.txt file.
+        
+        
+        
+Platform: UNKNOWN

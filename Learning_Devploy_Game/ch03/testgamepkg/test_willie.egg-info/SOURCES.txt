@@ -1,0 +1,16 @@
+LICENSE.txt
+MANIFEST.in
+README.rst
+setup.py
+test_willie.egg-info/PKG-INFO
+test_willie.egg-info/SOURCES.txt
+test_willie.egg-info/dependency_links.txt
+test_willie.egg-info/top_level.txt
+wargame/__init__.py
+wargame/abstractgameunit.py
+wargame/attackoftheorcs.py
+wargame/gameuniterror_v2.py
+wargame/gameutils.py
+wargame/hut.py
+wargame/knight.py
+wargame/orcrider.py

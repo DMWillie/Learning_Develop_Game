@@ -1,0 +1,387 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>wargame package &#8212; wargame [] documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="wargame-package">
+<h1>wargame package<a class="headerlink" href="#wargame-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-wargame.abstractgameunit">
+<span id="wargame-abstractgameunit-module"></span><h2>wargame.abstractgameunit module<a class="headerlink" href="#module-wargame.abstractgameunit" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:13/05/2019
+版本:2.0.0
+功能:兽人之袭文本游戏,AbstractGameUnit抽象类
+1.0.0版本改进之处:使用面向对象编程,并使用抽象基类
+1.0.0新增功能: 1.新的使命是获得所有木屋并击败所有的敌人</p>
+<blockquote>
+<div>2.可以在同伴的木屋或者空闲的木屋治疗
+3.引入一个或者多个骑士来帮助Foo先生,他们可以轮流占领木屋
+4.木屋的数量是可配置的,例如增加到10个
+5.每个木屋中可以存放一些黄金或者武器,这样Foo先生和他的同伴们可以捡起来</div></blockquote>
+<p>1.1.0新增功能:增加异常处理
+1.1.5改进之处:定义一个异常处理类
+2.0.0 代码模块化</p>
+<dl class="class">
+<dt id="wargame.abstractgameunit.AbstractGameUnit">
+<em class="property">class </em><code class="descclassname">wargame.abstractgameunit.</code><code class="descname">AbstractGameUnit</code><span class="sig-paren">(</span><em>name=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/abstractgameunit.html#AbstractGameUnit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.abstractgameunit.AbstractGameUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A base class for creating various game characters</p>
+<dl class="method">
+<dt id="wargame.abstractgameunit.AbstractGameUnit.attack">
+<code class="descname">attack</code><span class="sig-paren">(</span><em>enemy</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/abstractgameunit.html#AbstractGameUnit.attack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.abstractgameunit.AbstractGameUnit.attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main logic to determine injured unit and amount of injury</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Check if enemy exists!</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.abstractgameunit.AbstractGameUnit.heal">
+<code class="descname">heal</code><span class="sig-paren">(</span><em>heal_by=2</em>, <em>full_healing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/abstractgameunit.html#AbstractGameUnit.heal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.abstractgameunit.AbstractGameUnit.heal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heal the unit replenishing all the hit points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.abstractgameunit.AbstractGameUnit.info">
+<code class="descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/abstractgameunit.html#AbstractGameUnit.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.abstractgameunit.AbstractGameUnit.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information on the unit (MUST be overridden in subclasses)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.abstractgameunit.AbstractGameUnit.reset_health_meter">
+<code class="descname">reset_health_meter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/abstractgameunit.html#AbstractGameUnit.reset_health_meter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.abstractgameunit.AbstractGameUnit.reset_health_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the <cite>health_meter</cite> (assign default hit points)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.abstractgameunit.AbstractGameUnit.show_health">
+<code class="descname">show_health</code><span class="sig-paren">(</span><em>bold=False</em>, <em>end='\n'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/abstractgameunit.html#AbstractGameUnit.show_health"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.abstractgameunit.AbstractGameUnit.show_health" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the remaining hit points of the player and the enemy</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-wargame.attackoftheorcs">
+<span id="wargame-attackoftheorcs-module"></span><h2>wargame.attackoftheorcs module<a class="headerlink" href="#module-wargame.attackoftheorcs" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:13/05/2019
+版本:2.0.0
+功能:兽人之袭文本游戏,AttackOfTheOrcs类
+1.0.0版本改进之处:使用面向对象编程,并使用抽象基类
+1.0.0新增功能: 1.新的使命是获得所有木屋并击败所有的敌人</p>
+<blockquote>
+<div>2.可以在同伴的木屋或者空闲的木屋治疗
+3.引入一个或者多个骑士来帮助Foo先生,他们可以轮流占领木屋
+4.木屋的数量是可配置的,例如增加到10个
+5.每个木屋中可以存放一些黄金或者武器,这样Foo先生和他的同伴们可以捡起来</div></blockquote>
+<p>1.1.0新增功能:增加异常处理
+1.1.5改进之处:定义一个异常处理类
+2.0.0 代码模块化</p>
+<dl class="class">
+<dt id="wargame.attackoftheorcs.AttackOfTheOrcs">
+<em class="property">class </em><code class="descclassname">wargame.attackoftheorcs.</code><code class="descname">AttackOfTheOrcs</code><a class="reference internal" href="_modules/wargame/attackoftheorcs.html#AttackOfTheOrcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.attackoftheorcs.AttackOfTheOrcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class to play Attack of The Orcs game</p>
+<dl class="method">
+<dt id="wargame.attackoftheorcs.AttackOfTheOrcs.get_occupants">
+<code class="descname">get_occupants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/attackoftheorcs.html#AttackOfTheOrcs.get_occupants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.attackoftheorcs.AttackOfTheOrcs.get_occupants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of occupant types for all huts.</p>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Prone to bugs if self.huts is not populated.
+Chapter 2 talks about catching exceptions</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.attackoftheorcs.AttackOfTheOrcs.play">
+<code class="descname">play</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/attackoftheorcs.html#AttackOfTheOrcs.play"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.attackoftheorcs.AttackOfTheOrcs.play" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workhorse method to play the game.</p>
+<p>Controls the high level logic to play the game. This is called from
+the main program to begin the game execution.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.attackoftheorcs.AttackOfTheOrcs.show_game_mission">
+<code class="descname">show_game_mission</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/attackoftheorcs.html#AttackOfTheOrcs.show_game_mission"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.attackoftheorcs.AttackOfTheOrcs.show_game_mission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the game mission in the console</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-wargame.gameuniterror_v2">
+<span id="wargame-gameuniterror-v2-module"></span><h2>wargame.gameuniterror_v2 module<a class="headerlink" href="#module-wargame.gameuniterror_v2" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:12/05/2019
+版本:2.0
+功能:兽人之袭文本游戏的顶层代码的异常类
+2.0改进之处:将GameUnitError类作为一个基础的异常类,为不同特定异常继承基类</p>
+<dl class="exception">
+<dt id="wargame.gameuniterror_v2.GameUnitError">
+<em class="property">exception </em><code class="descclassname">wargame.gameuniterror_v2.</code><code class="descname">GameUnitError</code><span class="sig-paren">(</span><em>message=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/gameuniterror_v2.html#GameUnitError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.gameuniterror_v2.GameUnitError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Custom exceptions class for the ‘AbstractGameUnit’ and its subclass</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="wargame.gameuniterror_v2.HealthMeterException">
+<em class="property">exception </em><code class="descclassname">wargame.gameuniterror_v2.</code><code class="descname">HealthMeterException</code><span class="sig-paren">(</span><em>message=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/gameuniterror_v2.html#HealthMeterException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.gameuniterror_v2.HealthMeterException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#wargame.gameuniterror_v2.GameUnitError" title="wargame.gameuniterror_v2.GameUnitError"><code class="xref py py-class docutils literal notranslate"><span class="pre">wargame.gameuniterror_v2.GameUnitError</span></code></a></p>
+<p>Custom exception to report Health Meter related problems</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wargame.gameutils">
+<span id="wargame-gameutils-module"></span><h2>wargame.gameutils module<a class="headerlink" href="#module-wargame.gameutils" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:13/05/2019
+版本:2.0.0
+功能:兽人之袭文本游戏,工具类函数
+1.0.0版本改进之处:使用面向对象编程,并使用抽象基类
+1.0.0新增功能: 1.新的使命是获得所有木屋并击败所有的敌人</p>
+<blockquote>
+<div>2.可以在同伴的木屋或者空闲的木屋治疗
+3.引入一个或者多个骑士来帮助Foo先生,他们可以轮流占领木屋
+4.木屋的数量是可配置的,例如增加到10个
+5.每个木屋中可以存放一些黄金或者武器,这样Foo先生和他的同伴们可以捡起来</div></blockquote>
+<p>1.1.0新增功能:增加异常处理
+1.1.5改进之处:定义一个异常处理类
+2.0.0 代码模块化</p>
+<dl class="function">
+<dt id="wargame.gameutils.print_bold">
+<code class="descclassname">wargame.gameutils.</code><code class="descname">print_bold</code><span class="sig-paren">(</span><em>msg</em>, <em>end='\n'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/gameutils.html#print_bold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.gameutils.print_bold" title="Permalink to this definition">¶</a></dt>
+<dd><p>以粗体形式打印文本</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="wargame.gameutils.weighted_random_selection">
+<code class="descclassname">wargame.gameutils.</code><code class="descname">weighted_random_selection</code><span class="sig-paren">(</span><em>obj1</em>, <em>obj2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/gameutils.html#weighted_random_selection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.gameutils.weighted_random_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomly select between two objects based on assigned ‘weight’</p>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Todo</p>
+<p class="last">How about creating a utility module for common functionality?</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wargame.hut">
+<span id="wargame-hut-module"></span><h2>wargame.hut module<a class="headerlink" href="#module-wargame.hut" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:13/05/2019
+版本:2.0.0
+功能:兽人之袭文本游戏,Hut类
+1.0.0版本改进之处:使用面向对象编程,并使用抽象基类
+1.0.0新增功能: 1.新的使命是获得所有木屋并击败所有的敌人</p>
+<blockquote>
+<div>2.可以在同伴的木屋或者空闲的木屋治疗
+3.引入一个或者多个骑士来帮助Foo先生,他们可以轮流占领木屋
+4.木屋的数量是可配置的,例如增加到10个
+5.每个木屋中可以存放一些黄金或者武器,这样Foo先生和他的同伴们可以捡起来</div></blockquote>
+<p>1.1.0新增功能:增加异常处理
+1.1.5改进之处:定义一个异常处理类
+2.0.0 代码模块化</p>
+<dl class="class">
+<dt id="wargame.hut.Hut">
+<em class="property">class </em><code class="descclassname">wargame.hut.</code><code class="descname">Hut</code><span class="sig-paren">(</span><em>number</em>, <em>occupant</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/hut.html#Hut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.hut.Hut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class to create hut object(s) in the game Attack of the Orcs</p>
+<dl class="method">
+<dt id="wargame.hut.Hut.acquire">
+<code class="descname">acquire</code><span class="sig-paren">(</span><em>new_occupant</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/hut.html#Hut.acquire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.hut.Hut.acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the occupant of this hut</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.hut.Hut.get_occupant_type">
+<code class="descname">get_occupant_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/hut.html#Hut.get_occupant_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.hut.Hut.get_occupant_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string giving info on the hut occupant</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-wargame.knight">
+<span id="wargame-knight-module"></span><h2>wargame.knight module<a class="headerlink" href="#module-wargame.knight" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:13/05/2019
+版本:2.0.0
+功能:兽人之袭文本游戏,knight类
+1.0.0版本改进之处:使用面向对象编程,并使用抽象基类
+1.0.0新增功能: 1.新的使命是获得所有木屋并击败所有的敌人</p>
+<blockquote>
+<div>2.可以在同伴的木屋或者空闲的木屋治疗
+3.引入一个或者多个骑士来帮助Foo先生,他们可以轮流占领木屋
+4.木屋的数量是可配置的,例如增加到10个
+5.每个木屋中可以存放一些黄金或者武器,这样Foo先生和他的同伴们可以捡起来</div></blockquote>
+<p>1.1.0新增功能:增加异常处理
+1.1.5改进之处:定义一个异常处理类
+2.0.0 代码模块化</p>
+<dl class="class">
+<dt id="wargame.knight.Knight">
+<em class="property">class </em><code class="descclassname">wargame.knight.</code><code class="descname">Knight</code><span class="sig-paren">(</span><em>name='Sir Foo'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/knight.html#Knight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.knight.Knight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abstractgameunit.AbstractGameUnit</span></code></p>
+<p>Class that represents the game character ‘Knight’</p>
+<p>The player instance in the game is a Knight instance. Other Knight
+instances are considered as ‘friends’ of the player and is
+indicated by the attribute <cite>self.unit_type</cite> .</p>
+<dl class="method">
+<dt id="wargame.knight.Knight.acquire_hut">
+<code class="descname">acquire_hut</code><span class="sig-paren">(</span><em>hut</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/knight.html#Knight.acquire_hut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.knight.Knight.acquire_hut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fight the combat (command line) to acquire the hut</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.knight.Knight.info">
+<code class="descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/knight.html#Knight.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.knight.Knight.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print basic information about this character</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wargame.knight.Knight.run_away">
+<code class="descname">run_away</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/knight.html#Knight.run_away"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.knight.Knight.run_away" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abandon the battle.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-wargame.orcrider">
+<span id="wargame-orcrider-module"></span><h2>wargame.orcrider module<a class="headerlink" href="#module-wargame.orcrider" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:13/05/2019
+版本:2.0.0
+功能:兽人之袭文本游戏,OrcRider类
+1.0.0版本改进之处:使用面向对象编程,并使用抽象基类
+1.0.0新增功能: 1.新的使命是获得所有木屋并击败所有的敌人</p>
+<blockquote>
+<div>2.可以在同伴的木屋或者空闲的木屋治疗
+3.引入一个或者多个骑士来帮助Foo先生,他们可以轮流占领木屋
+4.木屋的数量是可配置的,例如增加到10个
+5.每个木屋中可以存放一些黄金或者武器,这样Foo先生和他的同伴们可以捡起来</div></blockquote>
+<p>1.1.0新增功能:增加异常处理
+1.1.5改进之处:定义一个异常处理类
+2.0.0 代码模块化</p>
+<dl class="class">
+<dt id="wargame.orcrider.OrcRider">
+<em class="property">class </em><code class="descclassname">wargame.orcrider.</code><code class="descname">OrcRider</code><span class="sig-paren">(</span><em>name=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/orcrider.html#OrcRider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.orcrider.OrcRider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abstractgameunit.AbstractGameUnit</span></code></p>
+<p>Class that represents the game character Orc Rider</p>
+<dl class="method">
+<dt id="wargame.orcrider.OrcRider.info">
+<code class="descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wargame/orcrider.html#OrcRider.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wargame.orcrider.OrcRider.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print basic information about this character</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-wargame">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wargame" title="Permalink to this headline">¶</a></h2>
+<p>作者:北辰
+日期:13/05/2019
+版本:2.0.0
+功能:兽人之袭文本游戏,__init__.py表示一个python包</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">wargame package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-wargame.abstractgameunit">wargame.abstractgameunit module</a></li>
+<li><a class="reference internal" href="#module-wargame.attackoftheorcs">wargame.attackoftheorcs module</a></li>
+<li><a class="reference internal" href="#module-wargame.gameuniterror_v2">wargame.gameuniterror_v2 module</a></li>
+<li><a class="reference internal" href="#module-wargame.gameutils">wargame.gameutils module</a></li>
+<li><a class="reference internal" href="#module-wargame.hut">wargame.hut module</a></li>
+<li><a class="reference internal" href="#module-wargame.knight">wargame.knight module</a></li>
+<li><a class="reference internal" href="#module-wargame.orcrider">wargame.orcrider module</a></li>
+<li><a class="reference internal" href="#module-wargame">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/wargame.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, DMWillie.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/wargame.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
